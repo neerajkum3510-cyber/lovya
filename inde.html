@@ -1,0 +1,109 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>A Tiny World of Mine</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Nunito:wght@400;600;800&family=Caveat:wght@600&display=swap">
+<style>
+/* Layout: a night-sky love letter. One card in the middle, soft hearts drifting up behind it, three pages swapped in place. Single dark look on purpose. */
+:root{
+  --night:#130b21;--plum:#2a1642;--card:#1c1030;--rose:#ff7eb0;--blush:#ffd6e6;--lilac:#c9b3ff;
+  --text:#efe6f8;--muted:#b9a8cf;--ink:#2a1236;--line:#ffffff1f;
+  --display:"Cormorant Garamond",Georgia,serif;--body:"Nunito",system-ui,sans-serif;--hand:"Caveat","Segoe Script",cursive;
+  color-scheme:dark}
+*{box-sizing:border-box}
+html{min-height:100%}
+body{margin:0;min-height:100vh;color:var(--text);font-family:var(--body);
+  background:radial-gradient(60% 45% at 50% 0%,#4a2370 0%,transparent 70%),radial-gradient(50% 40% at 90% 100%,#5a1d4d 0%,transparent 70%),var(--night);
+  display:flex;align-items:center;justify-content:center;overflow-x:hidden;
+  padding-block:20px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+#sky{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.float{position:absolute;bottom:-40px;color:var(--rose);opacity:0;animation:rise linear infinite}
+@keyframes rise{0%{transform:translateY(0) rotate(0);opacity:0}10%{opacity:.5}90%{opacity:.35}100%{transform:translateY(-110vh) rotate(25deg);opacity:0}}
+.wrap{position:relative;z-index:1;width:min(660px,100%);min-height:600px;background:linear-gradient(180deg,#24143bf2,#1c1030f2);border:1px solid var(--line);border-radius:30px;padding:clamp(24px,5.5vw,48px);box-shadow:0 30px 90px #0009,inset 0 1px 0 #ffffff14;display:flex;flex-direction:column;justify-content:space-between}
+.page{display:none}
+.page.active{display:block;animation:enter .7s cubic-bezier(.2,.7,.2,1) both}
+@keyframes enter{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.eyebrow{font:800 11px var(--body);letter-spacing:.28em;text-transform:uppercase;color:var(--lilac)}
+h1,h2{font-family:var(--display);font-weight:600;text-wrap:balance;color:var(--blush)}
+h1{font-size:clamp(46px,10vw,80px);line-height:.98;margin:22px 0 24px}
+h2{font-size:clamp(32px,6.4vw,50px);line-height:1.08;margin:20px 0 18px}
+em,.highlight{font-style:italic;color:var(--rose)}
+p{font-size:clamp(16px,2.9vw,18.5px);line-height:1.75;color:var(--text);margin:0 0 16px;max-width:52ch}
+.tiny{font-size:13px;line-height:1.6;color:var(--muted)}
+.hand{font-family:var(--hand);font-size:clamp(22px,4vw,28px);line-height:1.25;color:var(--blush);margin:22px 0 4px;transform:rotate(-1.5deg);max-width:30ch}
+.quote{font-family:var(--display);font-style:italic;font-size:clamp(22px,4.2vw,28px);line-height:1.35;color:var(--blush);border-left:2px solid var(--rose);padding-left:18px;margin:24px 0}
+.ask{font-family:var(--display);font-style:italic;font-weight:600;font-size:clamp(34px,7.2vw,56px);line-height:1.05;color:var(--rose);margin:10px 0 20px;text-wrap:balance}
+button,.button{border:0;border-radius:999px;padding:15px 24px;font:800 14px var(--body);letter-spacing:.02em;cursor:pointer;text-decoration:none;display:inline-block;transition:transform .2s,box-shadow .2s}
+button:hover,.button:hover{transform:translateY(-2px)}
+button:focus-visible,.button:focus-visible{outline:2px solid var(--blush);outline-offset:3px}
+.primary{background:linear-gradient(110deg,var(--rose),var(--lilac));color:var(--ink);box-shadow:0 10px 30px #ff7eb02e}
+.secondary{background:#ffffff0d;color:var(--text);border:1px solid #ffffff33}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.reply{font-family:var(--display);font-style:italic;font-size:clamp(22px,4vw,28px);line-height:1.35;color:var(--blush);margin-top:22px;min-height:1.4em}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:34px;padding-top:18px;border-top:1px solid var(--line)}
+.dots{display:flex;gap:7px}
+.dots i{width:7px;height:7px;border-radius:50%;background:#ffffff30;transition:.3s}
+.dots i.on{background:var(--rose);width:22px;border-radius:6px}
+@media(max-width:480px){.wrap{min-height:calc(100vh - 40px)}}
+@media(prefers-reduced-motion:reduce){.float{display:none}.page.active{animation:none}button,.button{transition:none}}
+</style>
+<div id="sky" aria-hidden="true"></div>
+<main class="wrap">
+<section class="page active" id="p1">
+<div class="eyebrow">a little something for you</div>
+<h1>Welcome to<br><em>my lil’ world.</em></h1>
+<p>Nothing fancy. Just a tiny corner of the internet, made for one very specific person.</p>
+<p>Before you judge my dramatic presentation skills… give me two minutes. Deal? ♡</p>
+<div class="hand">P.S. You are still allowed to roast me after this.</div>
+<div class="actions"><button class="primary" onclick="go(2)">Okay, show me →</button></div>
+</section>
+<section class="page" id="p2">
+<div class="eyebrow">chapter two · no spoilers</div>
+<h2>Are you ready to see <em>her?</em></h2>
+<p>One tiny warning: the answer might be closer than you think.</p>
+<p>Tap “Reveal her” to open Snapchat’s camera and meet the mystery girl. It opens in a new tab, so come back here after.</p>
+<div class="hand">Trust me, she’s worth the extra tap.</div>
+<div class="actions"><a class="button primary" href="https://web.snapchat.com" target="_blank" rel="noopener">Reveal her 👀</a><a class="button secondary" href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDk0MzAxMTI4NTg2Mzkw?story_media_id=3784388622104377781_68745898810&amp;exln=MWkwYmR1eTEweGVjcw==" target="_blank" rel="noopener">See the mystery girl 💗</a><button class="primary" onclick="go(3)">Okay… the real reveal →</button></div>
+</section>
+<section class="page" id="p3">
+<div class="eyebrow">the honest part</div>
+<h2>So… the girl I like is <em>you.</em> ♡</h2>
+<p>I could act mysterious, drop a hundred pickup lines, or pretend this is no big deal… but honestly, I just like talking to you.</p>
+<p>You’ve become someone who makes an ordinary day feel a little less ordinary. Somewhere along the way, my “just a friend” feelings started turning into something more.</p>
+<div class="quote">Your name on my screen is my favourite notification.</div>
+<p>So here’s my very serious, very nervous question:</p>
+<div class="ask">Would you let me take you on a date?</div>
+<p class="tiny">No pressure, okay? I value you and our friendship either way. I just wanted to be honest with you. 💗</p>
+<div class="actions"><button class="primary" onclick="answer('yes')">I’d like that ♡</button><button class="secondary" onclick="answer('time')">I need a little time</button></div>
+<div id="reply" class="reply" aria-live="polite"></div>
+</section>
+<div class="foot"><span class="tiny">Made by Neeraj ✦</span><div class="dots" id="dots"><i class="on"></i><i></i><i></i></div></div>
+</main>
+<script>
+function go(n){
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active')});
+  document.getElementById('p'+n).classList.add('active');
+  document.querySelectorAll('#dots i').forEach(function(d,i){d.classList.toggle('on',i===n-1)});
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function answer(k){
+  var t={yes:'You just made my whole day. I’m smiling at my screen like a fool. Tell me in chat, I’ll plan something good. 💗',time:'Take all the time you need. Same me, same friendship, no pressure at all. 💭'};
+  document.getElementById('reply').textContent=t[k];
+}
+(function(){
+  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  var sky=document.getElementById('sky'),g=['♡','♥','✦','·'];
+  for(var i=0;i<16;i++){
+    var s=document.createElement('span');s.className='float';
+    s.textContent=g[i%g.length];
+    s.style.left=(Math.random()*100)+'%';
+    s.style.fontSize=(12+Math.random()*20)+'px';
+    s.style.animationDuration=(14+Math.random()*14)+'s';
+    s.style.animationDelay=(-Math.random()*20)+'s';
+    sky.appendChild(s);
+  }
+})();
+</script>
+
+</body></html>
